@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ── Favicon ── -->
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="favicon.svg" sizes="any" />
+
+  <!-- ── Primary meta ── -->
+  <title>MINUS Lab | University of South Florida</title>
+  <meta name="description" content="Medical Imaging and Neural UltraSound Lab at the University of South Florida. Developing ultrasound technologies to understand and treat the brain." />
+
+  <!-- ── Open Graph (social sharing) ── -->
+  <!-- Replace og:url and og:image once the site is deployed -->
+  <meta property="og:type"        content="website" />
+  <meta property="og:site_name"   content="MINUS Lab" />
+  <meta property="og:title"       content="MINUS Lab | Medical Imaging and Neural UltraSound Lab" />
+  <meta property="og:description" content="Developing ultrasound technologies to understand and treat the brain. University of South Florida." />
+  <meta property="og:url"         content="https://your-lab-url.usf.edu" />
+  <meta property="og:image"       content="https://your-lab-url.usf.edu/media/og-preview.png" />
+
+  <!-- ── Twitter / X card ── -->
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:title"       content="MINUS Lab | Medical Imaging and Neural UltraSound Lab" />
+  <meta name="twitter:description" content="Developing ultrasound technologies to understand and treat the brain. University of South Florida." />
+  <meta name="twitter:image"       content="https://your-lab-url.usf.edu/media/og-preview.png" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+    rel="stylesheet"
+  />
+</head>
+<body>
+
+  <!-- ── Navigation ── -->
+  <nav id="navbar">
+    <div class="nav-inner">
+      <a class="nav-logo" href="#hero" aria-label="Go to home">
+        <img src="media/icons/300ppi/Logo.png" alt="MINUS Lab logo" />
+      </a>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#research">Research</a></li>
+        <li><a href="#news">News</a></li>
+        <li><a href="#publications">Publications</a></li>
+        <li><a href="#people">People</a></li>
+        <li><a href="#join">Join Us</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ── Scroll Container ── -->
+  <main id="scroll-container">
+
+    <!-- ─── 1. Hero ─── -->
+    <section id="hero" class="section s-hero">
+
+      <!--
+        ╔══════════════════════════════════════════════════╗
+        ║  BACKGROUND VIDEO                               ║
+        ║  Replace the empty src with your video file.    ║
+        ║  Example: src="media/lab-bg.mp4"                ║
+        ║  Recommended: MP4 (H.264), 1920×1080, ≤ 20 MB  ║
+        ╚══════════════════════════════════════════════════╝
+      -->
+      <video id="hero-video" autoplay loop muted playsinline>
+        <source src="media/videos/lab-bg.mp4" type="video/mp4" />
+      </video>
+
+      <!-- green colorize layer (multiply blend over the grayscale video) -->
+      <div class="hero-color-overlay"></div>
+
+      <div class="hero-bg-anim"></div>
+      <div class="hero-content">
+        <h1 class="hero-title" id="hero-title"></h1>
+        <p class="hero-sub"    id="hero-sub"></p>
+        <div class="hero-cta">
+          <a href="#research" class="btn btn-accent">Our Research</a>
+          <div class="hiring-wrap">
+            <a href="#join" class="btn btn-ghost">Join the Lab</a>
+          </div>
+        </div>
+      </div>
+      <div class="scroll-hint">
+        <span>Scroll</span>
+        <div class="scroll-chevron"></div>
+      </div>
+    </section>
+
+    <!-- ─── 2. Research ─── -->
+    <section id="research" class="section s-light">
+      <div class="section-inner">
+        <header class="section-header">
+          <span class="tag">What We Do</span>
+          <h2>Research</h2>
+          <p class="section-lead" id="research-lead"></p>
+        </header>
+        <div class="research-grid" id="research-grid"></div>
+        <div class="funding-strip" id="funding-strip"></div>
+      </div>
+    </section>
+
+    <!-- ─── 3. News ─── -->
+    <section id="news" class="section s-dark">
+      <div class="section-inner">
+        <header class="section-header light">
+          <span class="tag">Latest Updates</span>
+          <h2>News</h2>
+        </header>
+        <div class="news-list" id="news-list"></div>
+      </div>
+    </section>
+
+    <!-- ─── 4. Publications ─── -->
+    <section id="publications" class="section s-light">
+      <div class="section-inner">
+        <header class="section-header">
+          <span class="tag">Our Work</span>
+          <h2>Publications</h2>
+          <p class="section-lead">
+            Selected recent publications.
+            <a id="pub-list-link" href="#" class="inline-link">Full list →</a>
+          </p>
+        </header>
+        <div class="pub-list" id="pub-list"></div>
+        <div class="pub-cta">
+          <a id="pub-all-link" href="#" class="btn btn-outline-dark">View All Publications</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── 5. People ─── -->
+    <section id="people" class="section s-accent">
+      <div class="section-inner">
+        <header class="section-header light">
+          <span class="tag">Our Team</span>
+          <h2>People</h2>
+        </header>
+        <div class="people-group">
+          <h3 class="group-label">Principal Investigator</h3>
+          <div class="pi-card" id="pi-card"></div>
+        </div>
+        <div id="people-groups"></div>
+      </div>
+    </section>
+
+    <!-- ─── 6. Join Us ─── -->
+    <section id="join" class="section s-light">
+      <div class="section-inner">
+        <header class="section-header">
+          <span class="tag">Opportunities</span>
+          <h2>Join Us</h2>
+          <p class="section-lead">
+            We are always looking for passionate, curious researchers to join our team.
+          </p>
+        </header>
+        <ul class="join-list" id="join-grid"></ul>
+        <p class="join-note"  id="join-note"></p>
+      </div>
+    </section>
+
+    <!-- ─── 7. Contact ─── -->
+    <section id="contact" class="section s-hero">
+      <div class="section-inner">
+        <header class="section-header light">
+          <span class="tag">Find Us</span>
+          <h2>Contact</h2>
+        </header>
+        <div class="contact-grid">
+          <div class="contact-info" id="contact-info"></div>
+          <div class="map-box">
+            <iframe data-src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1463.5523196746299!2d-82.41552479934307!3d28.05547193378983!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88c2c7ba67d6a7d1%3A0x336703b284aff2c5!2sUSF%20Research%20Park!5e0!3m2!1sen!2sca!4v1780522398542!5m2!1sen!2sca"
+              width="100%" height="100%" style="border:0;" allowfullscreen
+              referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+        </div>
+        <footer class="site-footer" id="site-footer"></footer>
+      </div>
+    </section>
+
+  </main><!-- #scroll-container -->
+
+  <script src="config.js"></script><!-- ← edit this file to update the site -->
+  <script src="script.js"></script>
+</body>
+</html>
