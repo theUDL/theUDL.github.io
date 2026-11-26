@@ -36,6 +36,8 @@ The second was cleaning up the picture. The treatment beam is far stronger than 
 
 With that guidance in place, we tried the approach on the median nerve in the human forearm.
 
+![The setup used in people. A focused ultrasound probe, with an imaging probe at its centre, is aimed at the median nerve in the forearm while a heat stimulus is applied to the hand.](media/research/fus/human-setup.jpg)
+
 The first lesson was about aim. The same device setting moved the nerve by different amounts from one session to the next, depending on how the probe was coupled to the skin, its angle, and where it was pointed. Without a live measurement, there would have been no way to know.
 
 The second was an early sign of an effect: in a preliminary test, sonicating the nerve lowered ratings of a painful heat stimulus by about one point. That is a first observation, not proof, and it needs larger controlled studies.
@@ -43,6 +45,8 @@ The second was an early sign of an effect: in a preliminary test, sonicating the
 ## Watching the brain respond
 
 Treating a nerve in the arm or leg changes activity in the brain, and the brain is where pain is ultimately felt.
+
+![The idea in one picture: pain signals travel along a nerve to the brain, where they show up as changes in blood flow. Focused ultrasound aimed at the nerve changes what arrives.](media/research/fus/pain-pathway.mp4)
 
 Using ultrasound to image blood flow in the brain, we mapped how the cortex of a mouse responds when a peripheral nerve is treated with focused ultrasound. The response grew with the strength of the stimulation. Mice with nerve-injury pain showed altered patterns of brain connectivity, and focused ultrasound changed how their brains responded to pain ([Lee et al., *IEEE Transactions on Biomedical Engineering*](https://doi.org/10.1109/TBME.2024.3352025)).
 
