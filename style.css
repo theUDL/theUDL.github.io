@@ -582,28 +582,7 @@ img { display: block; max-width: 100%; }
   border-bottom: 1px solid rgba(255,255,255,.1);
 }
 
-/* PI card */
-.pi-card {
-  background: rgba(255,255,255,.06);
-  border: 1px solid rgba(255,255,255,.1);
-  border-radius: var(--radius);
-  padding: 2rem;
-  display: flex;
-  gap: 2rem;
-  align-items: flex-start;
-}
-.pi-avatar {
-  width: 140px; height: 140px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--accent2), var(--accent));
-  display: flex; align-items: center; justify-content: center;
-  font-weight: 800; font-size: 1.6rem;
-  color: #fff;
-  flex-shrink: 0;
-}
-.pi-info h4 { font-size: 1.15rem; font-weight: 700; color: var(--text-l); margin-bottom: .2rem; }
-.pi-role    { font-size: .85rem; color: var(--accent); margin-bottom: .75rem; font-weight: 500; }
-.pi-bio     { font-size: .9rem; color: rgba(255,255,255,.65); line-height: 1.7; margin-bottom: .9rem; }
+/* Link buttons (profile pages) */
 .pi-links   { display: flex; gap: .75rem; flex-wrap: wrap; }
 .pi-links a {
   font-size: .8rem; font-weight: 600; color: var(--accent);
@@ -645,13 +624,9 @@ img { display: block; max-width: 100%; }
 
 /* Photo avatars */
 .avatar-photo    { display: block; object-fit: cover; object-position: top; background: none; }
-img.pi-avatar    { border: 2px solid rgba(207,196,147,.3); }
 img.team-avatar  { margin: 0 auto .9rem; }
 /* Homepage photos are black & white until their card is hovered or focused */
-.pi-card img.pi-avatar,
 .team-card img.team-avatar { filter: grayscale(1); transition: filter .35s; }
-.pi-card:hover img.pi-avatar,
-.pi-card:focus-within img.pi-avatar,
 .team-card:hover img.team-avatar,
 .team-card:focus-visible img.team-avatar { filter: none; }
 
@@ -801,7 +776,6 @@ img.team-avatar  { margin: 0 auto .9rem; }
   /* Sections */
   .section { padding: calc(var(--nav-h) + 1.5rem) 1.25rem 2rem; }
   .contact-grid { grid-template-columns: 1fr; }
-  .pi-card { flex-direction: column; gap: 1.25rem; }
 
   /* Hamburger animation */
   .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
@@ -820,9 +794,6 @@ img.team-avatar  { margin: 0 auto .9rem; }
    Person pages (person.html)
 ═══════════════════════════════════════════════ */
 a.team-card { display: block; }
-.pi-avatar-link { flex-shrink: 0; border-radius: 50%; transition: transform .25s; }
-.pi-avatar-link:hover { transform: scale(1.05); }
-.pi-info h4 a:hover { color: var(--accent); }
 
 body.page-person {
   overflow: auto;

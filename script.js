@@ -54,27 +54,21 @@
     }
     renderPublications(S.publications || []);
 
-    // PI
+    // One card per person — everyone gets the same card; an `id` makes it a link
+    const personCard = m => `
+              <${m.id ? `a href="person.html?id=${encodeURIComponent(m.id)}"` : 'div'} class="team-card">
+                ${m.photo
+                  ? `<img class="team-avatar avatar-photo" src="${m.photo}" alt="${m.name}" loading="lazy">`
+                  : `<div class="team-avatar">${m.initials || ''}</div>`}
+                <h4>${m.name}</h4>
+                <p class="team-role">${m.role || ''}</p>
+                ${m.topic ? `<p class="team-topic">${m.topic}</p>` : ''}
+              </${m.id ? 'a' : 'div'}>`;
+
+    // PI (bio and links live on their profile page)
     const pi = S.pi;
-    let piLinks = [
-      pi.links.cv      ? `<a href="${pi.links.cv}">CV</a>` : '',
-      pi.links.scholar ? `<a href="${pi.links.scholar}">Google Scholar</a>` : '',
-      pi.links.github  ? `<a href="${pi.links.github}">GitHub</a>` : '',
-      pi.links.email   ? `<a href="${pi.links.email}">Email</a>` : '',
-    ].filter(Boolean).join('');
-    const piHref   = pi.id ? `person.html?id=${encodeURIComponent(pi.id)}` : '';
-    const piAvatar = pi.photo
-      ? `<img class="pi-avatar avatar-photo" src="${pi.photo}" alt="${pi.name}" loading="lazy">`
-      : `<div class="pi-avatar">PI</div>`;
-    if (piHref) piLinks = `<a href="${piHref}">Full profile →</a>` + piLinks;
-    document.getElementById('pi-card').innerHTML = `
-      ${piHref ? `<a class="pi-avatar-link" href="${piHref}" aria-label="${pi.name} profile">${piAvatar}</a>` : piAvatar}
-      <div class="pi-info">
-        <h4>${piHref ? `<a href="${piHref}">${pi.name}</a>` : pi.name}</h4>
-        <p class="pi-role">${pi.title}, ${S.department}</p>
-        <p class="pi-bio">${pi.bio}</p>
-        <div class="pi-links">${piLinks}</div>
-      </div>`;
+    document.getElementById('pi-card').innerHTML =
+      personCard({ ...pi, role: pi.title, topic: pi.topic || S.department, initials: pi.initials || 'PI' });
 
     // Team — grouped by role
     const grpOrder = [
@@ -107,15 +101,7 @@
         <div class="people-group">
           <h3 class="group-label">${g.label}</h3>
           <div class="team-grid">
-            ${members.map(m => `
-              <${m.id ? `a href="person.html?id=${encodeURIComponent(m.id)}"` : 'div'} class="team-card">
-                ${m.photo
-                  ? `<img class="team-avatar avatar-photo" src="${m.photo}" alt="${m.name}" loading="lazy">`
-                  : `<div class="team-avatar">${m.initials || ''}</div>`}
-                <h4>${m.name}</h4>
-                <p class="team-role">${m.role}</p>
-                <p class="team-topic">${m.topic}</p>
-              </${m.id ? 'a' : 'div'}>`).join('')}
+            ${members.map(personCard).join('')}
           </div>
         </div>`;
       }).join('');
@@ -229,9 +215,20 @@
     }
   }
 
+  // News and publications arrive after the page has opened and push the
+  // sections below them down. If the page was opened at a section link
+  // (e.g. index.html#people) and the visitor hasn't scrolled yet, go back to it.
+  let userMoved = false;
+  ['wheel', 'touchstart', 'keydown', 'mousedown'].forEach(ev =>
+    window.addEventListener(ev, () => { userMoved = true; }, { once: true, passive: true }));
+  function keepAnchor() {
+    const target = location.hash.length > 1 && document.getElementById(location.hash.slice(1));
+    if (target && !userMoved) target.scrollIntoView({ behavior: 'instant' });
+  }
+
   populateSite();
-  loadNews();
-  loadPublications();
+  loadNews().finally(keepAnchor);
+  loadPublications().finally(keepAnchor);
 
   // ── Scroll & nav ─────────────────────────────────────────────────────
   const container = document.getElementById('scroll-container');
@@ -363,7 +360,7 @@
 
   // ── Intersection Observer: fade-in cards on scroll ───────────
   const fadeTargets = document.querySelectorAll(
-    '.r-card, .news-item, .pub-item, .team-card, .join-card, .pi-card, .contact-block'
+    '.r-card, .news-item, .pub-item, .team-card, .join-card, .contact-block'
   );
 
   fadeTargets.forEach(el => {
