@@ -38,6 +38,23 @@
     if (area.backgroundPosition) bg.style.backgroundPosition = area.backgroundPosition;
     document.body.prepend(bg);
     document.body.classList.add('has-bg');
+
+    // The picture is a little taller than the window and drifts upward slowly
+    // as the page is scrolled, reaching the end of its travel at the bottom.
+    if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      let queued = false;
+      const drift = () => {
+        queued = false;
+        const max = document.documentElement.scrollHeight - innerHeight;
+        const progress = max > 0 ? Math.min(1, Math.max(0, scrollY / max)) : 0;
+        bg.style.transform = `translate3d(0, ${(-progress * (bg.offsetHeight - innerHeight)).toFixed(1)}px, 0)`;
+      };
+      addEventListener('scroll', () => {
+        if (!queued) { queued = true; requestAnimationFrame(drift); }
+      }, { passive: true });
+      addEventListener('resize', drift);
+      drift();
+    }
   }
 
   document.title = `${area.title} | ${S.fullName}`;

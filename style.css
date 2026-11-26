@@ -513,6 +513,7 @@ img { display: block; max-width: 100%; }
 .badge-talk      { background: rgba(0,103,71,.3);     color: #6dcfaa; }
 .badge-grant     { background: rgba(0,103,71,.3);     color: #6dcfaa; }
 .badge-milestone { background: rgba(255,255,255,.15); color: #fff; }
+.badge-people    { background: rgba(207,196,147,.2);  color: var(--accent); }
 
 .read-more {
   display: inline-block;
@@ -1016,8 +1017,10 @@ body.page-article { background: var(--white); }
 /* Write-ups with a `background` picture: the picture stays put, the text scrolls over it */
 .article-bg {
   position: fixed;
-  inset: 0;
+  top: 0; left: 0; right: 0;
+  height: 100vh;
   z-index: 0;
+  will-change: transform;
   background-color: #05070c;
   background-size: cover;
   background-position: center;
@@ -1085,4 +1088,10 @@ body.has-bg { background: #05070c; }
   .has-bg .article { padding-left: .75rem; padding-right: .75rem; }
   .has-bg .article-head { padding-left: .5rem; padding-right: .5rem; }
   .has-bg .article-sheet { padding: 1.75rem 1.25rem 2.25rem; border-radius: 12px; }
+}
+
+/* Slow upward drift of the background picture while scrolling (set in research.js).
+   The picture is 18% taller than the window, and that extra is how far it travels. */
+@media (prefers-reduced-motion: no-preference) {
+  .article-bg { height: 118vh; }
 }

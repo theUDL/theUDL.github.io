@@ -136,10 +136,18 @@ const SITE = {
   // the most recent newsLimit items. The array below is only used as a fallback
   // if news.json cannot be loaded.
   newsLimit: 4,  // how many news items to show
-  // type options: "paper" | "award" | "talk" | "grant" | "milestone"
+  // type options: "paper" | "award" | "talk" | "grant" | "milestone" | "people"
   // title/desc can include basic HTML e.g. <em>italic</em>
   // Add newest items at the top
   news: [
+    {
+      month: "Nov",
+      year:  2026,
+      type:  "people",
+      title: "Md Farhan Tanvir joins the lab as a PhD student",
+      desc:  "We are delighted to welcome Farhan as the lab's first PhD student.",
+      link:  "person.html?id=farhan-tanvir",
+    },
     {
       month: "Nov",
       year:  2026,
@@ -148,6 +156,14 @@ const SITE = {
       desc:  "After months of hard work setting up our space in the USF Research Park, we are officially open and ready to kick off our research projects.",
       link:  "",   // leave "" for no "Read more" link
       image: "media/news/opening.png",
+    },
+    {
+      month: "Oct",
+      year:  2026,
+      type:  "award",
+      title: "Prof. Lee receives a BMES Young Pioneers Award",
+      desc:  "Stephen Alexander Lee was recognized with a 2026 Young Pioneers Award by the Biomedical Engineering Society (BMES) in Orlando, FL.",
+      link:  "person.html?id=stephen-lee",
     },
   ],
 
@@ -160,6 +176,8 @@ const SITE = {
   orcid: {
     id:      "0000-0002-1315-4266",  // ← the lab's (PI's) ORCID iD
     limit:   10,                     // max publications shown on the homepage
+    leadOnly: true,                  // homepage shows only papers where the PI is first,
+                                     //   second or last author (profile pages list everything)
     exclude: [],                     // papers to hide: a DOI or part of a title,
                                      //   e.g. ["10.1101/2020.05.01.072157"]
   },
@@ -173,13 +191,6 @@ const SITE = {
   publications: [
     {
       year:    2026,
-      title:   "Displacement-Guided Focused Ultrasound of the Median Nerve Modulates Somatosensory Evoked Potentials in Humans",
-      authors: 'Erica P. McCune, Samuel G. Blackman, Hermes A. S. Kamimura, Ethan V. Bendau, Talia D. Sachs, Seongyeon Kim, <strong>Stephen A. Lee</strong>, Christopher J. Winfree, Elisa E. Konofagou',
-      venue:   "<em>IEEE Transactions on Biomedical Engineering</em>",
-      links:   [ { label: "DOI", url: "https://doi.org/10.1109/TBME.2025.3602291" } ],
-    },
-    {
-      year:    2026,
       title:   "Assessing cerebral capillary function and stalling using single capillary reporters in ultrasound localization microscopy",
       authors: '<strong>Stephen A. Lee</strong>, Alexis Leconte, Alice Wu, Joshua Kinugasa, Gerardo Ramos Palacios, Jonathan Porée, Abbas F. Sadikot, Andreas Linninger, Jean Provost',
       venue:   "<em>Proceedings of the National Academy of Sciences</em>",
@@ -187,24 +198,31 @@ const SITE = {
     },
     {
       year:    2025,
-      title:   "A Tracking Prior to Localization Workflow for Ultrasound Localization Microscopy",
-      authors: 'Alexis Leconte, Jonathan Porée, Brice Rauby, Alice Wu, Nin Ghigo, Paul Xing, <strong>Stephen Lee</strong>, Chloé Bourquin, Gerardo Ramos-Palacios, Abbas F. Sadikot, Jean Provost',
-      venue:   "<em>IEEE Transactions on Medical Imaging</em>",
-      links:   [ { label: "DOI", url: "https://doi.org/10.1109/TMI.2024.3456676" } ],
-    },
-    {
-      year:    2025,
-      title:   "A Unified Framework Combining Doppler-Based Motion Compensation, Harmonic Imaging, and Angular Coherence for High-Quality B-Mode in Ultrafast Echocardiography",
-      authors: 'Michael Mougharbel, Jonathan Porée, <strong>Stephen A. Lee</strong>, Paul Xing, Alice Wu, Jean-Claude Tardif, Jean Provost',
-      venue:   "<em>IEEE Transactions on Ultrasonics, Ferroelectrics, and Frequency Control</em>",
-      links:   [ { label: "DOI", url: "https://doi.org/10.1109/TUFFC.2024.3505060" } ],
-    },
-    {
-      year:    2025,
       title:   "Ultrasound Cavitation Enables Rapid, Initiator-Free Fabrication of Tough Anti-Freezing Hydrogels",
       authors: 'Yixun Cheng, <strong>Stephen Lee</strong>, Yihang Xiao, Shou Ohmura, Louis-Jacques Bourdages, Justin Puma, Zixin He, Zhen Yang, Jeremy Brown, Jean Provost, Jianyu Li',
       venue:   "<em>Advanced Science</em>",
       links:   [ { label: "DOI", url: "https://doi.org/10.1002/ADVS.202416844" } ],
+    },
+    {
+      year:    2024,
+      title:   "Functional Cerebral Neurovascular Mapping During Focused Ultrasound Peripheral Neuromodulation of Neuropathic Pain",
+      authors: '<strong>Stephen A. Lee</strong>, Hermes A. S. Kamimura, Mila Smith, Elisa E. Konofagou',
+      venue:   "<em>IEEE Transactions on Biomedical Engineering</em>",
+      links:   [ { label: "DOI", url: "https://doi.org/10.1109/TBME.2024.3352025" } ],
+    },
+    {
+      year:    2023,
+      title:   "Interdependence of Tissue Temperature, Cavitation, and Displacement Imaging During Focused Ultrasound Nerve Sonication",
+      authors: 'Erica P. McCune, <strong>Stephen A. Lee</strong>, Elisa E. Konofagou',
+      venue:   "<em>IEEE Transactions on Ultrasonics, Ferroelectrics, and Frequency Control</em>",
+      links:   [ { label: "DOI", url: "https://doi.org/10.1109/TUFFC.2023.3280455" } ],
+    },
+    {
+      year:    2022,
+      title:   "FUS-Net: U-Net-Based FUS Interference Filtering",
+      authors: '<strong>Stephen A. Lee</strong>, Elisa E. Konofagou',
+      venue:   "<em>IEEE Transactions on Medical Imaging</em>",
+      links:   [ { label: "DOI", url: "https://doi.org/10.1109/TMI.2021.3128641" } ],
     },
   ],
 

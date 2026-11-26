@@ -194,7 +194,9 @@
     const o = SITE.orcid;
     if (o && o.id) {
       try {
-        const works = await LabPubs.load(o.id, o.exclude);
+        let works = await LabPubs.load(o.id, o.exclude);
+        // leadOnly: keep papers where the PI is first, second or last author
+        if (o.leadOnly && SITE.pi.author) works = works.filter(w => LabPubs.isLead(w, SITE.pi.author));
         if (!works.length) throw new Error();
         renderPublications(works.slice(0, o.limit || 10).map(w => LabPubs.format(w, labAuthors())));
       } catch { renderPublications(SITE.publications||[]); }

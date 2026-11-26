@@ -5,6 +5,7 @@
 //   LabPubs.format(paper, authors)  → { year, title, authors, venue, links }
 //                                     (same shape as the manual list in config.js)
 //   LabPubs.isAuthor(name, author)  → does "First Last" match { last, initial }?
+//   LabPubs.isLead(paper, author)   → is that person first, second or last author?
 const LabPubs = (() => {
   const API = 'https://pub.orcid.org/v3.0/';
   const MAX_AUTHORS = 10;   // longer author lists are shortened with "et al."
@@ -28,6 +29,12 @@ const LabPubs = (() => {
     const parts = String(name).trim().toLowerCase().split(/\s+/);
     if (parts[parts.length - 1] !== a.last.toLowerCase()) return false;
     return !a.initial || parts.length < 2 || parts[0].startsWith(a.initial.toLowerCase());
+  }
+
+  // First, second or last author of a paper
+  function isLead(w, a) {
+    const i = w.authors.findIndex(n => isAuthor(n, a));
+    return i === 0 || i === 1 || (i >= 0 && i === w.authors.length - 1);
   }
 
   async function getJson(path) {
@@ -137,5 +144,5 @@ const LabPubs = (() => {
     };
   }
 
-  return { load, format, isAuthor };
+  return { load, format, isAuthor, isLead };
 })();

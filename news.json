@@ -2,10 +2,28 @@
   {
     "month": "Nov",
     "year":  2026,
+    "type":  "people",
+    "title": "Md Farhan Tanvir joins the lab as a PhD student",
+    "desc":  "We are delighted to welcome Farhan as the lab's first PhD student. He joins us after a master's degree in Biomedical Engineering at USF, where he used photoacoustic tomography to study cardiac and cerebrovascular changes. In the lab he will work on ultrasound localization microscopy to study the brain's microvasculature.",
+    "link":  "person.html?id=farhan-tanvir",
+    "image": ""
+  },
+  {
+    "month": "Nov",
+    "year":  2026,
     "type":  "milestone",
     "title": "We have opened the doors to our lab @ USF!",
     "desc":  "After months of hard work setting up our space in the USF Research Park, we are officially open and ready to kick off our research projects. We are excited to welcome our first group of students and postdocs, and to start building a vibrant research community focused on ultrasound neuromodulation and microbubble technologies.",
     "link":  "",
     "image": "media/news/opening.png"
+  },
+  {
+    "month": "Oct",
+    "year":  2026,
+    "type":  "award",
+    "title": "Prof. Lee receives a BMES Young Pioneers Award",
+    "desc":  "Stephen Alexander Lee was recognized with a 2026 Young Pioneers Award by the Biomedical Engineering Society (BMES) in Orlando, FL.",
+    "link":  "person.html?id=stephen-lee",
+    "image": ""
   }
 ]
