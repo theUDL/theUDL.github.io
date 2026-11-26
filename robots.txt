@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
 
-# Replace with your actual deployed URL once the site is live:
-# Sitemap: https://your-lab-url.edu/sitemap.xml
+Sitemap: https://theudl.github.io/sitemap.xml

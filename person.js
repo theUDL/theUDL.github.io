@@ -122,4 +122,9 @@
   }
 
   loadPubs();
+
+  // The page is built by this script, so a link to a section of it
+  // (e.g. …#person-pubs) has to be followed by hand
+  const anchor = location.hash.length > 1 && document.getElementById(location.hash.slice(1));
+  if (anchor) anchor.scrollIntoView();
 })();

@@ -72,6 +72,17 @@ const SITE = {
 
   // ── 5. RESEARCH AREAS ───────────────────────────────────────────────
   // icon: any single character, symbol, or emoji  |  Add or remove cards freely
+  // Give an area an `id` and its card links to a full write-up at research.html?id=<id>:
+  //   • the text of the write-up lives in research/<id>.md (plain Markdown —
+  //     "## Heading" for sections, and a picture on its own line as
+  //     ![caption](media/research/picture.jpg) becomes a captioned figure;
+  //     a .mp4 file written the same way plays as a silent looping video)
+  //   • background: an optional picture that stays fixed behind the write-up
+  //     while the text scrolls over it
+  //   • papers: the DOIs listed under "Relevant publications". Each is looked
+  //     up on the lab's ORCID record (section 7), so it must be on that record.
+  //     House rule: list (and describe as ours in the write-up) only papers
+  //     where the PI is first, second or last author.
   researchLead: "Our lab develops ultrasound imaging and therapeutic technologies to create new ways to interact with our nervous system, ultimately aiming to improve how we understand, diagnose, and treat neurological disorders.",
   research: [
     {
@@ -79,12 +90,29 @@ const SITE = {
       title: "Super Resolution and Functional Brain Imaging",
       desc:  "The cerebral microvasculature is a traditionally underserved target for understanding brain function and dysfunction. We develop ultrasound technologies to image and interact with the brain's microvascular system at unprecedented resolution and sensitivity.",
       image: "media/research/brain-imaging.png",  // e.g. "media/research/brain-imaging.jpg"
+      id:    "brain-imaging",
+      background: "media/research/ulm-background.jpg",  // stays fixed behind the write-up; "" for a plain page
+      backgroundPosition: "24% center",                 // which part of the picture stays in view
+      papers: [
+        "10.1073/pnas.2509564123",       // single capillary reporters
+        "10.1109/TBME.2024.3352025",     // functional ultrasound during neuromodulation
+        "10.1101/2023.10.19.563176",     // flow imaging after blood-brain barrier opening
+      ],
     },
     {
       icon:  "◉",
       title: "Focused Ultrasound Neuromodulation",
       desc:  "We explore the use of focused ultrasound to modulate neural activity non-invasively, aiming to develop new therapeutic approaches for neurological disorders.",
       image: "media/research/neuromodulation.png",  // e.g. "media/research/neuromodulation.jpg"
+      id:    "neuromodulation",
+      papers: [
+        "10.1109/TBME.2024.3352025",     // brain mapping during neuromodulation
+        "10.1109/TUFFC.2023.3280455",    // temperature, cavitation and displacement
+        "10.1109/TMI.2021.3128641",      // FUS-Net
+        "10.1109/TUFFC.2020.3014183",    // displacement imaging in humans
+        "10.1109/TMI.2020.2992498",      // displacement imaging
+        "10.1088/1361-6560/aa9fc2",      // first in vivo nerve stimulation
+      ],
     },
     //{
     //  icon:  "◎",
@@ -108,41 +136,18 @@ const SITE = {
   // the most recent newsLimit items. The array below is only used as a fallback
   // if news.json cannot be loaded.
   newsLimit: 4,  // how many news items to show
-  // type options: "paper" | "award" | "talk" | "grant"
+  // type options: "paper" | "award" | "talk" | "grant" | "milestone"
   // title/desc can include basic HTML e.g. <em>italic</em>
   // Add newest items at the top
   news: [
     {
-      month: "May",
+      month: "Nov",
       year:  2026,
-      type:  "paper",
-      title: 'New paper accepted at <em>[Journal / Conference]</em>',
-      desc:  "Brief summary of the paper, its findings, and why it matters to the field.",
-      link:  "#",
-    },
-    {
-      month: "Apr",
-      year:  2026,
-      type:  "award",
-      title: "[Lab Member] receives the [Award Name]",
-      desc:  "Congratulations to [name] for this recognition of their work on [topic].",
-      link:  "#",
-    },
-    {
-      month: "Mar",
-      year:  2026,
-      type:  "talk",
-      title: "Invited talk at [Conference Name]",
-      desc:  "PI [Name] presents recent results on [topic] in [City, Country].",
-      link:  "#",
-    },
-    {
-      month: "Jan",
-      year:  2026,
-      type:  "grant",
-      title: "New funding from [Funding Agency]",
-      desc:  "The lab receives a grant to support research on [topic] over the next [X] years.",
-      link:  "#",
+      type:  "milestone",
+      title: "We have opened the doors to our lab @ USF!",
+      desc:  "After months of hard work setting up our space in the USF Research Park, we are officially open and ready to kick off our research projects.",
+      link:  "",   // leave "" for no "Read more" link
+      image: "media/news/opening.png",
     },
   ],
 
@@ -163,40 +168,43 @@ const SITE = {
   // Wrap journal/venue in <em>…</em> for italics
   // Set a link's url to "" to hide that button
   // Set publicationsListUrl to "" to hide the "Full list" and "View All" links
-  publicationsListUrl: "#",
+  // (it points at the PI's profile page, which lists every paper on the ORCID record)
+  publicationsListUrl: "person.html?id=stephen-lee#person-pubs",
   publications: [
     {
       year:    2026,
-      title:   "Title of Paper One: A Comprehensive Study of [Topic]",
-      authors: 'Author A, <strong>Author B</strong>, Author C, Author D',
-      venue:   "<em>Journal of Important Science</em>, vol. 42, pp. 1–15",
-      links:   [
-        { label: "PDF",  url: "#" },
-        { label: "Code", url: "#" },
-        { label: "DOI",  url: "#" },
-      ],
+      title:   "Displacement-Guided Focused Ultrasound of the Median Nerve Modulates Somatosensory Evoked Potentials in Humans",
+      authors: 'Erica P. McCune, Samuel G. Blackman, Hermes A. S. Kamimura, Ethan V. Bendau, Talia D. Sachs, Seongyeon Kim, <strong>Stephen A. Lee</strong>, Christopher J. Winfree, Elisa E. Konofagou',
+      venue:   "<em>IEEE Transactions on Biomedical Engineering</em>",
+      links:   [ { label: "DOI", url: "https://doi.org/10.1109/TBME.2025.3602291" } ],
+    },
+    {
+      year:    2026,
+      title:   "Assessing cerebral capillary function and stalling using single capillary reporters in ultrasound localization microscopy",
+      authors: '<strong>Stephen A. Lee</strong>, Alexis Leconte, Alice Wu, Joshua Kinugasa, Gerardo Ramos Palacios, Jonathan Porée, Abbas F. Sadikot, Andreas Linninger, Jean Provost',
+      venue:   "<em>Proceedings of the National Academy of Sciences</em>",
+      links:   [ { label: "DOI", url: "https://doi.org/10.1073/pnas.2509564123" } ],
     },
     {
       year:    2025,
-      title:   "Title of Paper Two: Novel Methods for [Problem]",
-      authors: 'Author B, Author E, <strong>Author F</strong>',
-      venue:   "<em>Conference on Advanced Research (CAR 2025)</em> — Best Paper Award",
-      links:   [
-        { label: "PDF",    url: "#" },
-        { label: "Slides", url: "#" },
-        { label: "DOI",    url: "#" },
-      ],
+      title:   "A Tracking Prior to Localization Workflow for Ultrasound Localization Microscopy",
+      authors: 'Alexis Leconte, Jonathan Porée, Brice Rauby, Alice Wu, Nin Ghigo, Paul Xing, <strong>Stephen Lee</strong>, Chloé Bourquin, Gerardo Ramos-Palacios, Abbas F. Sadikot, Jean Provost',
+      venue:   "<em>IEEE Transactions on Medical Imaging</em>",
+      links:   [ { label: "DOI", url: "https://doi.org/10.1109/TMI.2024.3456676" } ],
     },
     {
       year:    2025,
-      title:   "Title of Paper Three: Understanding [Phenomenon] via [Method]",
-      authors: '<strong>Author G</strong>, Author H, Author I, Author J',
-      venue:   "<em>Nature Methods</em>, vol. 10, pp. 120–135",
-      links:   [
-        { label: "PDF",  url: "#" },
-        { label: "Data", url: "#" },
-        { label: "DOI",  url: "#" },
-      ],
+      title:   "A Unified Framework Combining Doppler-Based Motion Compensation, Harmonic Imaging, and Angular Coherence for High-Quality B-Mode in Ultrafast Echocardiography",
+      authors: 'Michael Mougharbel, Jonathan Porée, <strong>Stephen A. Lee</strong>, Paul Xing, Alice Wu, Jean-Claude Tardif, Jean Provost',
+      venue:   "<em>IEEE Transactions on Ultrasonics, Ferroelectrics, and Frequency Control</em>",
+      links:   [ { label: "DOI", url: "https://doi.org/10.1109/TUFFC.2024.3505060" } ],
+    },
+    {
+      year:    2025,
+      title:   "Ultrasound Cavitation Enables Rapid, Initiator-Free Fabrication of Tough Anti-Freezing Hydrogels",
+      authors: 'Yixun Cheng, <strong>Stephen Lee</strong>, Yihang Xiao, Shou Ohmura, Louis-Jacques Bourdages, Justin Puma, Zixin He, Zhen Yang, Jeremy Brown, Jean Provost, Jianyu Li',
+      venue:   "<em>Advanced Science</em>",
+      links:   [ { label: "DOI", url: "https://doi.org/10.1002/ADVS.202416844" } ],
     },
   ],
 

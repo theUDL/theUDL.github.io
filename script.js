@@ -17,12 +17,14 @@
 
     // Research
     document.getElementById('research-lead').textContent = S.researchLead;
+    // An area with an `id` links to its write-up at research.html?id=<id>
     document.getElementById('research-grid').innerHTML = S.research.map(r => `
-      <div class="r-card${r.image ? ' has-bg' : ''}"${r.image ? ` style="--r-img:url('${r.image}')"` : ''}>
+      <${r.id ? `a href="research.html?id=${encodeURIComponent(r.id)}"` : 'div'} class="r-card${r.image ? ' has-bg' : ''}"${r.image ? ` style="--r-img:url('${r.image}')"` : ''}>
         <div class="r-icon">${r.icon}</div>
         <h3>${r.title}</h3>
         <p>${r.desc}</p>
-      </div>`).join('');
+        ${r.id ? `<span class="read-more">Read more →</span>` : ''}
+      </${r.id ? 'a' : 'div'}>`).join('');
 
     // Funding logos
     const fundingEl = document.getElementById('funding-strip');
@@ -154,7 +156,7 @@
           <span class="badge badge-${n.type}">${cap(n.type)}</span>
           <h3>${n.title}</h3>
           <p>${n.desc}</p>
-          ${n.link ? `<a href="${n.link}" class="read-more">Read more →</a>` : ''}
+          ${n.link && n.link !== '#' ? `<a href="${n.link}" class="read-more">Read more →</a>` : ''}
         </div>
       </article>`).join('');
   }
