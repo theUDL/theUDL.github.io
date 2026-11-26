@@ -65,46 +65,32 @@
                 ${m.topic ? `<p class="team-topic">${m.topic}</p>` : ''}
               </${m.id ? 'a' : 'div'}>`;
 
-    // PI (bio and links live on their profile page)
+    // Everyone on one grid: PI first, then the team in the order below.
+    // The role shown on each card comes from `role` in config.js.
     const pi = S.pi;
-    document.getElementById('pi-card').innerHTML =
-      personCard({ ...pi, role: pi.title, topic: pi.topic || S.department, initials: pi.initials || 'PI' });
-
-    // Team — grouped by role
-    const grpOrder = [
-      { key: 'postdoc',  label: 'Postdoctoral Researchers' },
-      { key: 'phd',      label: 'PhD Students' },
-      { key: 'masters',  label: "Master's Students" },
-      { key: 'undergrad', label: 'Undergraduate Researchers' },
-      { key: 'alumni',   label: 'Alumni' },
-    ];
-    document.getElementById('people-groups').innerHTML = grpOrder
-      .map(g => {
-        const members = S.team.filter(m => (m.group || 'phd') === g.key);
-        if (!members.length) return '';
-        const isAlumni = g.key === 'alumni';
-        if (isAlumni) {
-          return `
+    const order = ['postdoc', 'phd', 'masters', 'undergrad'];
+    const grp   = m => m.group || 'phd';
+    const current = order.flatMap(k => S.team.filter(m => grp(m) === k));
+    const alumni  = S.team.filter(m => grp(m) === 'alumni');
+    document.getElementById('people-groups').innerHTML = `
         <div class="people-group">
-          <h3 class="group-label">${g.label}</h3>
+          <div class="team-grid">
+            ${personCard({ ...pi, role: pi.role || 'Principal Investigator', topic: pi.topic || pi.title, initials: pi.initials || 'PI' })}
+            ${current.map(personCard).join('')}
+          </div>
+        </div>
+        ${alumni.length ? `
+        <div class="people-group">
+          <h3 class="group-label">Alumni</h3>
           <ul class="alumni-list">
-            ${members.map(m => `
+            ${alumni.map(m => `
               <li class="alumni-item">
                 <span class="alumni-name">${m.name}</span>
                 <span class="alumni-role">${m.role}</span>
                 ${m.now ? `<span class="alumni-now">▸ ${m.now}</span>` : ''}
               </li>`).join('')}
           </ul>
-        </div>`;
-        }
-        return `
-        <div class="people-group">
-          <h3 class="group-label">${g.label}</h3>
-          <div class="team-grid">
-            ${members.map(personCard).join('')}
-          </div>
-        </div>`;
-      }).join('');
+        </div>` : ''}`;
 
     // Join Us
     const positions = [

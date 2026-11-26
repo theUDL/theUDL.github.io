@@ -202,7 +202,9 @@ const SITE = {
 
 
   // ── 8. TEAM MEMBERS ─────────────────────────────────────────────────
+  // Everyone appears on one grid of cards, PI first; `role` is the label on the card.
   // group:   "postdoc" | "phd" | "masters" | "undergrad" | "alumni"  (default: "phd" if omitted)
+  //          sets the order on the grid; alumni get their own list underneath
   // photo:   path to image, e.g. "media/members/jane-doe.jpg" (leave "" for initials circle)
   // initials: shown only when photo is missing
   // For alumni, add  now: "Current position at Institution"
