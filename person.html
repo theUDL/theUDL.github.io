@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <title>People | Ultrasound Design Lab</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+    rel="stylesheet"
+  />
+</head>
+<body class="page-person">
+
+  <!-- ── Navigation (links go back to the homepage sections) ── -->
+  <nav id="navbar" class="scrolled">
+    <div class="nav-inner">
+      <a class="nav-logo" href="index.html" aria-label="Go to home">
+        <img src="media/icons/300ppi/Logo.png" alt="Lab logo" />
+      </a>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html#research">Research</a></li>
+        <li><a href="index.html#news">News</a></li>
+        <li><a href="index.html#publications">Publications</a></li>
+        <li><a href="index.html#people" class="active">People</a></li>
+        <li><a href="index.html#join">Join Us</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Everything below is filled in by person.js from config.js -->
+  <header class="person-hero">
+    <div class="person-inner">
+      <a class="person-back" href="index.html#people">← Back to People</a>
+      <div class="person-head" id="person-head"></div>
+    </div>
+  </header>
+
+  <main class="person-body">
+    <div class="person-inner" id="person-body"></div>
+  </main>
+
+  <footer class="person-footer" id="person-footer"></footer>
+
+  <script src="config.js"></script>
+  <script src="pubs.js"></script>
+  <script src="person.js"></script>
+</body>
+</html>

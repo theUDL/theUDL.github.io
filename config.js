@@ -31,8 +31,33 @@ const SITE = {
 
 
   // ── 4. PRINCIPAL INVESTIGATOR ───────────────────────────────────────
+  // Each person with an `id` gets their own page at person.html?id=<id>
+  //   id:     short unique name used in the page link (lowercase, no spaces)
+  //   awards: list shown on their page — leave [] to hide the section
+  //   orcid:  their own ORCID iD — their page then lists everything on that
+  //           record. Leave it out and the page lists the papers on the lab's
+  //           ORCID record (section 7) that they are an author of.
+  //   author: how their name appears in author lists, used to find their papers
+  //           and show their name in bold. `initial` is optional.
+  //   papers: extra papers to list by hand (same format as `publications` below)
   pi: {
-    photo: "",             // path e.g. "media/members/pi.jpg" — leave "" to show initials
+    id:    "stephen-lee",
+    orcid: "0000-0002-1315-4266",
+    photo: "media/members/stephen-lee.jpg",   // leave "" to show initials
+    author: { last: "Lee", initial: "S" },
+    papers: [],
+    awards: [
+      { year: 2026, title: "Young Pioneers Award", org: "Biomedical Engineering Society (BMES), Orlando, FL" },
+      { year: 2023, title: "Yuen-huo Hung and Chao-chin Huang Award", org: "Columbia University, Department of Biomedical Engineering" },
+      { year: 2022, title: "Young Investigator Award", org: "8th International Symposium on Focused Ultrasound, Bethesda, MD" },
+      { year: 2022, title: "Student Award Finalist", org: "International Society for Therapeutic Ultrasound, Toronto, ON" },
+      { year: 2019, title: "1st Place Student Best Paper Award", org: "IEEE International Ultrasonics Symposium, Glasgow, Scotland" },
+      { year: 2019, title: "1st Place Student Poster Competition", org: "Columbia University BME Symposium, New York, NY" },
+      { year: 2019, title: "Frank Morrell Endowed Memorial Scholarship", org: "Marine Biological Laboratory, Woods Hole, MA" },
+      { year: 2019, title: "Milton L. Shifman Endowed Scholarship", org: "Marine Biological Laboratory, Woods Hole, MA" },
+      { year: 2017, title: "Student Travel Award", org: "IEEE International Ultrasonics Symposium, Washington, DC" },
+      { year: 2014, title: "Dunlevie Honors Undergraduate Research Award", org: "UNC Chapel Hill Honors Program, Chapel Hill, NC" },
+    ],
     name:  "Prof. Stephen Alexander Lee",
     title: "Assistant Professor",
     bio:   "Stephen Alexander Lee is an Assistant Professor in the Department of Medical Engineering at the University of South Florida, and directs the Ultrasound Design Lab. The lab's research develops ultrasound imaging and therapeutic technologies to interact with the nervous system, spanning super-resolution functional imaging of the brain's microvasculature and focused ultrasound neuromodulation. The goal is to create new ways to understand, diagnose, and treat neurological disorders.",
@@ -123,16 +148,17 @@ const SITE = {
 
 
   // ── 7. PUBLICATIONS ─────────────────────────────────────────────────
-  // ── Zotero (recommended) ─────────────────────────────────────────────
-  // Create a public group at zotero.org/groups, then paste its numeric ID below.
-  // Example: https://www.zotero.org/groups/1234567/minus-lab → groupId: "1234567"
-  // The site will auto-fetch your most recent `limit` papers sorted by date.
-  // Leave groupId as "" to use the manual publications list below instead.
-  zotero: {
-    groupId: "6572867",  // ← paste your Zotero group ID here
-    limit:   10,  // max publications to show
+  // ── ORCID (recommended) ──────────────────────────────────────────────
+  // The list is pulled live from the PI's ORCID record (orcid.org), so a new
+  // paper shows up here as soon as it is on that record — nothing to edit.
+  // Leave id as "" to use the manual publications list below instead.
+  orcid: {
+    id:      "0000-0002-1315-4266",  // ← the lab's (PI's) ORCID iD
+    limit:   10,                     // max publications shown on the homepage
+    exclude: [],                     // papers to hide: a DOI or part of a title,
+                                     //   e.g. ["10.1101/2020.05.01.072157"]
   },
-  // ── Manual fallback (used when groupId is empty) ──────────────────────
+  // ── Manual fallback (used when id is empty or ORCID is unreachable) ──────────────────────
   // Wrap lab member names in <strong>…</strong> to bold them
   // Wrap journal/venue in <em>…</em> for italics
   // Set a link's url to "" to hide that button
@@ -183,7 +209,22 @@ const SITE = {
   team: [
     // —— Postdocs ——
     // —— PhD Students ——
-    { initials: "FT", name: "Md Farhan Tanvir", role: "PhD Student",    topic: "Super-resolution ultrasound and neurovascular coupling", group: "phd",     photo: "" },
+    // Give a member an `id` (plus bio / awards / author / papers, as for the PI
+    // above) and their card links to their own page.
+    {
+      id:       "farhan-tanvir",
+      initials: "FT",
+      name:     "Md Farhan Tanvir",
+      role:     "PhD Student",
+      topic:    "Super-resolution ultrasound and neurovascular coupling",
+      group:    "phd",
+      photo:    "media/members/farhan-tanvir.jpg",
+      bio:      "Md Farhan Tanvir is a PhD student in Biomedical Engineering at the University of South Florida. He received his bachelor’s degree from Khulna University of Engineering & Technology (KUET), Bangladesh, and his master’s degree in Biomedical Engineering from the University of South Florida. His previous research involved the use of photoacoustic tomography to investigate cardiac and cerebrovascular changes associated with prenatal alcohol exposure. In the Lee Lab, he will focus on ultrasound localization microscopy to study the cerebral microvasculature.",
+      author:   { last: "Tanvir" },
+      awards:   [],   // e.g. { year: 2026, title: "Award name", org: "Awarding body" }
+      papers:   [],
+      links:    {},   // optional: email: "mailto:…", scholar: "https://…", github: "https://…", cv: "media/cv/…"
+    },
     // —— Undergrads ——
     // —— Alumni ——
   ],

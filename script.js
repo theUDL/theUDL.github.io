@@ -42,7 +42,7 @@
     // News (rendered by renderNews; auto-updated from news.json)
     renderNews(S.news || []);
 
-    // Publications (rendered by renderPublications; auto-updated from Zotero if configured)
+    // Publications (rendered by renderPublications; auto-updated from ORCID if configured)
     const pubListLink = document.getElementById('pub-list-link');
     const pubAllLink  = document.getElementById('pub-all-link');
     if (S.publicationsListUrl) {
@@ -56,18 +56,21 @@
 
     // PI
     const pi = S.pi;
-    const piLinks = [
+    let piLinks = [
       pi.links.cv      ? `<a href="${pi.links.cv}">CV</a>` : '',
       pi.links.scholar ? `<a href="${pi.links.scholar}">Google Scholar</a>` : '',
       pi.links.github  ? `<a href="${pi.links.github}">GitHub</a>` : '',
       pi.links.email   ? `<a href="${pi.links.email}">Email</a>` : '',
     ].filter(Boolean).join('');
+    const piHref   = pi.id ? `person.html?id=${encodeURIComponent(pi.id)}` : '';
+    const piAvatar = pi.photo
+      ? `<img class="pi-avatar avatar-photo" src="${pi.photo}" alt="${pi.name}" loading="lazy">`
+      : `<div class="pi-avatar">PI</div>`;
+    if (piHref) piLinks = `<a href="${piHref}">Full profile →</a>` + piLinks;
     document.getElementById('pi-card').innerHTML = `
-      ${pi.photo
-        ? `<img class="pi-avatar avatar-photo" src="${pi.photo}" alt="${pi.name}" loading="lazy">`
-        : `<div class="pi-avatar">PI</div>`}
+      ${piHref ? `<a class="pi-avatar-link" href="${piHref}" aria-label="${pi.name} profile">${piAvatar}</a>` : piAvatar}
       <div class="pi-info">
-        <h4>${pi.name}</h4>
+        <h4>${piHref ? `<a href="${piHref}">${pi.name}</a>` : pi.name}</h4>
         <p class="pi-role">${pi.title}, ${S.department}</p>
         <p class="pi-bio">${pi.bio}</p>
         <div class="pi-links">${piLinks}</div>
@@ -105,14 +108,14 @@
           <h3 class="group-label">${g.label}</h3>
           <div class="team-grid">
             ${members.map(m => `
-              <div class="team-card">
+              <${m.id ? `a href="person.html?id=${encodeURIComponent(m.id)}"` : 'div'} class="team-card">
                 ${m.photo
                   ? `<img class="team-avatar avatar-photo" src="${m.photo}" alt="${m.name}" loading="lazy">`
                   : `<div class="team-avatar">${m.initials || ''}</div>`}
                 <h4>${m.name}</h4>
                 <p class="team-role">${m.role}</p>
                 <p class="team-topic">${m.topic}</p>
-              </div>`).join('')}
+              </${m.id ? 'a' : 'div'}>`).join('')}
           </div>
         </div>`;
       }).join('');
@@ -192,11 +195,11 @@
     } catch { renderNews(SITE.news || []); }
   }
 
-  // ── Publications: render items (from config or Zotero) ────────────────
+  // ── Publications: render items (from config or ORCID) ────────────────
   function renderPublications(items) {
     document.getElementById('pub-list').innerHTML = items.map(p => {
       const linkHtml = (p.links||[]).filter(l => l.url)
-        .map(l => `<a href="${l.url}">${l.label}</a>`).join('');
+        .map(l => `<a href="${l.url}" target="_blank" rel="noopener">${l.label}</a>`).join('');
       return `
       <div class="pub-item">
         <div class="pub-year">${p.year}</div>
@@ -210,30 +213,16 @@
     }).join('');
   }
 
+  // Everyone in config.js with an `author` entry — their names are shown in bold
+  const labAuthors = () => [SITE.pi, ...(SITE.team || [])].map(x => x && x.author).filter(Boolean);
+
   async function loadPublications() {
-    const z = SITE.zotero;
-    if (z && z.groupId) {
+    const o = SITE.orcid;
+    if (o && o.id) {
       try {
-        const url = `https://api.zotero.org/groups/${encodeURIComponent(z.groupId)}/items/top`
-          + `?format=json&sort=date&direction=desc&limit=${z.limit||10}`;
-        const res = await fetch(url);
-        if (!res.ok) throw new Error();
-        const items = (await res.json()).map(item => {
-          const d = item.data;
-          const authors = (d.creators||[])
-            .filter(c => c.creatorType==='author')
-            .map(c => c.firstName ? `${c.firstName} ${c.lastName}` : (c.name||''))
-            .join(', ');
-          const year = parseInt(d.date) || new Date().getFullYear();
-          let v = d.publicationTitle || d.conferenceName || d.proceedingsTitle || d.repository || '';
-          if (d.volume) v += `, vol. ${d.volume}`;
-          if (d.pages)  v += `, pp. ${d.pages}`;
-          const links = [];
-          if (d.DOI) links.push({label:'DOI', url:`https://doi.org/${d.DOI}`});
-          if (d.url) links.push({label:'Link', url:d.url});
-          return { year, title: d.title||'', authors, venue: v ? `<em>${v}</em>` : '', links };
-        });
-        renderPublications(items);
+        const works = await LabPubs.load(o.id, o.exclude);
+        if (!works.length) throw new Error();
+        renderPublications(works.slice(0, o.limit || 10).map(w => LabPubs.format(w, labAuthors())));
       } catch { renderPublications(SITE.publications||[]); }
     } else {
       renderPublications(SITE.publications||[]);
