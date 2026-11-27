@@ -1,6 +1,15 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
   <rect width="64" height="64" rx="14" fill="#006747"/>
-  <text x="50%" y="54%" dominant-baseline="middle" text-anchor="middle"
-        font-family="Georgia, serif" font-weight="700" font-size="36"
-        fill="#CFC493">N</text>
+  <g fill="none" stroke="#CFC493" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round">
+    <!-- S -->
+    <path d="M29 19C28 13 24 11 18 11C11 11 6.5 14.5 6.5 21C6.5 28.5 12.5 30.5 18 32C23.5 33.5 29.5 35.5 29.5 43C29.5 49.5 25 53.5 18 53.5C12 53.5 7.5 51 6.5 45.5"/>
+    <!-- 李 = 木 (top) + 子 (bottom) -->
+    <path d="M35.5 18H58.5"/>
+    <path d="M47 8.5V30"/>
+    <path d="M46 20L36.2 31.5"/>
+    <path d="M48 20L57.7 31.5"/>
+    <path d="M41 37.5H53L47.4 44"/>
+    <path d="M47.4 44C52 47 50 57.5 43 55.5"/>
+    <path d="M35 47.5H59"/>
+  </g>
 </svg>
