@@ -1152,3 +1152,15 @@ body.has-bg { background: #05070c; }
   15%  {                        opacity: .9; }
   100% { transform: scale(1);   opacity: 0; }
 }
+
+/* A small background picture shown as a band across the top (backgroundMaxHeight in config.js) */
+.article-bg.band {
+  background-size: auto var(--band);
+  background-repeat: no-repeat;
+}
+.article-bg.band::after {
+  background: linear-gradient(180deg,
+    rgba(5,7,12,.45) 0,
+    rgba(5,7,12,.2) calc(var(--band) * .45),
+    #05070c var(--band));
+}

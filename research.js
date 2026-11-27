@@ -36,6 +36,13 @@
     bg.className = 'article-bg';
     bg.style.backgroundImage = `url('${area.background}')`;
     if (area.backgroundPosition) bg.style.backgroundPosition = area.backgroundPosition;
+    // backgroundMaxHeight: show the picture as a band across the top of the window,
+    // no taller than this many pixels, fading into the dark page below it. Use it
+    // for pictures too small to fill the whole window without looking blurry.
+    if (area.backgroundMaxHeight) {
+      bg.classList.add('band');
+      bg.style.setProperty('--band', `min(66vh, ${Number(area.backgroundMaxHeight)}px)`);
+    }
     document.body.prepend(bg);
     document.body.classList.add('has-bg');
 

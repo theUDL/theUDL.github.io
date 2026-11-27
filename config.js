@@ -93,6 +93,8 @@ const SITE = {
       id:    "brain-imaging",
       background: "media/research/ulm-background.jpg",  // stays fixed behind the write-up; "" for a plain page
       backgroundPosition: "24% center",                 // which part of the picture stays in view
+      // backgroundMaxHeight: 540,                      // uncomment to show the picture as a sharper band across
+                                                        //   the top instead of filling the whole window
       papers: [
         "10.1073/pnas.2509564123",       // single capillary reporters
         "10.1109/TBME.2024.3352025",     // functional ultrasound during neuromodulation
