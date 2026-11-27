@@ -1095,3 +1095,60 @@ body.has-bg { background: #05070c; }
 @media (prefers-reduced-motion: no-preference) {
   .article-bg { height: 118vh; }
 }
+
+/* ═══════════════════════════════════════════════
+   Animated nav logo (built by logo.js)
+═══════════════════════════════════════════════ */
+.logo-anim {
+  display: block;
+  height: 44px;
+  width: auto;
+  max-width: 150px;
+  overflow: visible;
+}
+/* Wavefronts travelling down the beam from the "D" to the focus */
+.logo-wave {
+  fill: #0b3d2c;
+  opacity: 0;
+}
+.play .logo-wave {
+  animation: logo-wave 1s linear both;
+  animation-delay: calc(var(--i) * .2s);
+}
+@keyframes logo-wave {
+  0%   { transform: translateX(0);       opacity: 0; }
+  12%  {                                 opacity: .85; }
+  85%  {                                 opacity: .85; }
+  100% { transform: translateX(-1950px); opacity: 0; }
+}
+/* The focus lights up as the waves arrive */
+.logo-flash {
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.play .logo-flash { animation: logo-flash 1.5s ease-out .85s both; }
+@keyframes logo-flash {
+  0%   { opacity: 0;  transform: scale(.2); }
+  25%  { opacity: 1;  transform: scale(1); }
+  55%  { opacity: .8; transform: scale(.8); }
+  100% { opacity: 0;  transform: scale(1.3); }
+}
+/* Ripples spreading out from the focus */
+.logo-ripple {
+  fill: none;
+  stroke: #e6dcae;
+  stroke-width: 80;
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.play .logo-ripple {
+  animation: logo-ripple 1.7s cubic-bezier(.2,.6,.4,1) both;
+  animation-delay: calc(1.05s + var(--i) * .3s);
+}
+@keyframes logo-ripple {
+  0%   { transform: scale(.08); opacity: 0; }
+  15%  {                        opacity: .9; }
+  100% { transform: scale(1);   opacity: 0; }
+}
